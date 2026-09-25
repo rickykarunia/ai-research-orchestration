@@ -174,7 +174,7 @@ def semantic_chunk(text, max_chars=SEM_MAX_CHARS, min_chars=SEM_MIN_CHARS):
 
 def _extract(path):
     """Yield (locator, text). PDF: locator = int page number. Markdown: locator = the
-    section heading string (Marker/pdf2md output). The locator lands in chunk['page'];
+    section heading string (Marker-style converter output). The locator lands in chunk['page'];
     retrieve() renders an int as 'p N' and a string verbatim, so old PDF indexes
     (page = int) keep working with no reindex."""
     if path.lower().endswith(".md"):

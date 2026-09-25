@@ -59,8 +59,8 @@ parks the original PDF in `1. raw/_source-pdf/` (outside both engines' sweep).
    `[NEEDS SOURCE]` - that's per-vault isolation working, not a retrieval failure.
 
    `vcorpus.py ingest` only picks up `.md` in `1. raw/`; `.pdf` is handled by `corpus.py`. For a
-   table-heavy or confidential PDF, run `.\rag.ps1 convert "name.pdf"` (wraps `pdf2md.ps1`
-   /Marker; `-Describe` adds image descriptions via the `gpt-5.6-luna` LLM, needs `OPENAI_API_KEY`).
+   table-heavy or confidential PDF, run `.\rag.ps1 convert "name.pdf"` (runs the PDF-to-Markdown
+   script named in `AIO_PDF2MD`, for example a wrapper around Marker).
    The resulting `.md` lands in `1. raw/`, the original PDF moves to `1. raw/_source-pdf/`. Table cells stay
    intact within a chunk and the locator uses the section heading. Number/table queries tend to score
    lower than prose (often `weak`), so verify table results rather than take them at face value.

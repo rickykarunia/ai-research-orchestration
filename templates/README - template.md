@@ -109,7 +109,7 @@ By default `rag.ps1 <command>` calls `vcorpus.py`. Add `-Page` to call `corpus.p
 | `.\rag.ps1 ask "..."` | `py -3.13 .\vcorpus.py ask "..."` |
 | `.\rag.ps1 ask "..." -Page` | `py -3.13 .\corpus.py ask "..."` |
 | `.\rag.ps1 ask-file "x" "q"` | `py -3.13 .\vcorpus.py ask-file "x" "q"` |
-| `.\rag.ps1 convert "x.pdf"` | `pdf2md.ps1` + promote the `.md` + park the PDF under `1. raw\_source-pdf\` |
+| `.\rag.ps1 convert "x.pdf"` | the `AIO_PDF2MD` converter + promote the `.md` + park the PDF under `1. raw\_source-pdf\` |
 | `.\rag.ps1 review-draft "x"` | `py -3.13 scripts\review-draft.py <vault> "x"` (control plane) |
 | `.\rag.ps1 synth` | calls `ask-batch.ps1` (control plane) with `-Vault` set to this vault |
 | `.\rag.ps1 status` | counts `1. raw`/`2. wiki`/`3. output` + calls `loop_check.py` |

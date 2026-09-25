@@ -163,7 +163,7 @@ switch ($Command) {
                 Select-Object -ExpandProperty FullName)
 
     & $Pdf2Md $pdf
-    if ($LASTEXITCODE -ne 0) { throw "pdf2md.ps1 failed (exit $LASTEXITCODE). The PDF was not moved." }
+    if ($LASTEXITCODE -ne 0) { throw "PDF converter $Pdf2Md failed (exit $LASTEXITCODE). The PDF was not moved." }
 
     # Marker normalizes the output folder/file names, so the path can't be predicted.
     # Take the .md that's NEWLY appeared; if that's ambiguous, take the most recently written one.
