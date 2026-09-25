@@ -1,0 +1,10 @@
+{
+  "name": "ai-research-orchestration",
+  "description": "Vault-based AI research orchestration for Claude Code and Codex: raw → wiki → output loop, routing index, local and cloud retrieval.",
+  "version": "1.0.0",
+  "author": { "name": "rickykarunia", "url": "https://github.com/rickykarunia" },
+  "homepage": "https://github.com/rickykarunia/ai-research-orchestration",
+  "repository": "https://github.com/rickykarunia/ai-research-orchestration",
+  "license": "MIT",
+  "keywords": ["research", "obsidian", "vault", "rag", "loop", "codex"]
+}

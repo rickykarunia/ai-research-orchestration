@@ -1,0 +1,15 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "ai-research-orchestration",
+  "description": "Vault-based AI research orchestration for Claude Code and Codex: raw → wiki → output loop, routing index, local and cloud retrieval.",
+  "owner": { "name": "rickykarunia", "url": "https://github.com/rickykarunia" },
+  "plugins": [
+    {
+      "name": "ai-research-orchestration",
+      "description": "Vault-based AI research orchestration for Claude Code and Codex: raw → wiki → output loop, routing index, local and cloud retrieval.",
+      "version": "1.0.0",
+      "source": "./",
+      "category": "productivity"
+    }
+  ]
+}

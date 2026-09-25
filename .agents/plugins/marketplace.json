@@ -1,0 +1,12 @@
+{
+  "name": "ai-research-orchestration",
+  "interface": { "displayName": "AI Research Orchestration" },
+  "plugins": [
+    {
+      "name": "ai-research-orchestration",
+      "source": { "source": "url", "url": "https://github.com/rickykarunia/ai-research-orchestration.git", "ref": "main" },
+      "policy": { "installation": "AVAILABLE", "authentication": "ON_INSTALL" },
+      "category": "Productivity"
+    }
+  ]
+}

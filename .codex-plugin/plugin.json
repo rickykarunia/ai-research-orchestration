@@ -1,0 +1,21 @@
+{
+  "name": "ai-research-orchestration",
+  "version": "1.0.0",
+  "description": "Vault-based AI research orchestration for Claude Code and Codex: raw → wiki → output loop, routing index, local and cloud retrieval.",
+  "author": { "name": "rickykarunia", "url": "https://github.com/rickykarunia" },
+  "homepage": "https://github.com/rickykarunia/ai-research-orchestration",
+  "repository": "https://github.com/rickykarunia/ai-research-orchestration",
+  "license": "MIT",
+  "keywords": ["research", "obsidian", "vault", "rag", "loop"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "AI Research Orchestration",
+    "shortDescription": "Plan, act, review, verify loop for research vaults",
+    "longDescription": "Skills that run a raw → wiki → output research loop over Obsidian-style vaults (plan, act, review, verify) and keep a cross-vault routing index in sync.",
+    "developerName": "rickykarunia",
+    "category": "Productivity",
+    "capabilities": ["Interactive", "Read", "Write"],
+    "defaultPrompt": ["Run the loop engine for this vault.", "Sync the vault index."],
+    "websiteURL": "https://github.com/rickykarunia/ai-research-orchestration"
+  }
+}

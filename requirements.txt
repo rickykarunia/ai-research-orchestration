@@ -1,0 +1,5 @@
+fastembed
+numpy
+openai
+pageindex
+pypdf

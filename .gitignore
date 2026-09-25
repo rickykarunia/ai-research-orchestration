@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+.venv*/
+*.bak*
+.pageindex/
+.vector/
+tmp/
+.superpowers/
+retrieval/eval-results.json
+retrieval/evalset.jsonl
+retrieval/EVAL-REPORT.md
+pageindex-corpus/
+vector-corpus/
