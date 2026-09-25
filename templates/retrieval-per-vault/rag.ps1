@@ -94,7 +94,8 @@ function Resolve-Python {
 $PyParts = Resolve-Python
 $Py = $PyParts[0]
 $PyArgs = @($PyParts | Select-Object -Skip 1)
-$Engine = if ($Page) { "corpus.py" } else { "vcorpus.py" }
+# Only corpus.py implements remove, so it always goes there.
+$Engine = if ($Page -or $Command -eq "remove") { "corpus.py" } else { "vcorpus.py" }
 
 function Invoke-Engine([string]$EngineFile, [string[]]$EngineArgs) {
   $path = Join-Path $Vault $EngineFile

@@ -260,8 +260,8 @@ rag.ps1 <check|ingest|list|ask|ask-file|ask-essential|remove|synth|status|conver
   `.md` somewhere under `1. raw/marker_output/` (the layout Marker writes); it moves that file
   to `1. raw/<name>.md`. It never overwrites an existing `.md`, and leaves the PDF in place if
   conversion fails.
-- `remove "<name.pdf>" -Page`: drop one PDF from the PageIndex index and manifest. Only
-  `corpus.py` implements `remove`; `vcorpus.py` has no such command.
+- `remove "<name.pdf>"`: drop one PDF from the PageIndex index and manifest. Only
+  `corpus.py` implements `remove`, so `rag.ps1` always sends it there (`-Page` not needed).
 - `review-draft "<name>"`: flag candidate contradictions across a draft's entries.
 - `promote-terra "<slug>"` / `terra-context "<slug>"` / `terra-gate "<slug>" --note "<file>"`:
   the gap-fill, mechanical, and lint-only promotion lanes (see `promote-terra.py` above).
