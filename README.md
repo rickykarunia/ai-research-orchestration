@@ -26,6 +26,54 @@ gets its own vault; a routing index tells the agent which vault to open for a gi
 
 See `REFERENCE.md` for the full command and file reference.
 
+## One-screen map
+
+```text
+STAGE 1-2   scripts\new-vault.ps1  ->  AGENTS.md + 2. wiki\01 - Project Context.md
+                                        |
+                                        v  scripts\index_sync.py
+                                     AI-INDEX.md  (vault registered, routable)
+                                        |
+STAGE 3     drop source files    ->  <vault>\1. raw\
+                                        |
+                    +-------------------+-------------------+
+                    |                                       |
+                 *.pdf                                   *.md
+                    |                                       |
+STAGE 4        corpus.py ingest                      vcorpus.py ingest
+               -> .pageindex\                        -> .vector\
+               needs OPENAI_API_KEY                  local embeddings
+                    |                                       |
+                    +-------------------+-------------------+
+                                        |
+STAGE 5      ask-file / ask-essential  -> tmp\retrieval-packets\ + 2. wiki\_terra-drafts\
+             (ask-essential --new = only files without a draft yet; both engines)
+             ask / scripts\ask-batch.ps1 -> tmp\retrieval-packets\ only (cross-document)
+                                        |
+STAGE 6      terra-context lifts clean drafts without Kimi; promote-terra fills real gaps via kimi-k3
+             review-draft only flags contradiction candidates; both lanes run the structural gate
+                                        |
+                                        v
+                              <vault>\2. wiki\        <- notes with source-refs, where thinking happens
+                                        |
+STAGE 7                        /loop-engine <name>
+                    PLAN -> ACT -> REVIEW -> VERIFY -> FINISH
+                                        |
+                                        v
+                              <vault>\3. output\      <- deliverable, every claim tagged [K<n>]
+                                        |
+STAGE 8                   return leg + gap backlog flow back to 2. wiki
+```
+
+Rules that hold across every stage:
+
+1. `1. raw` is the evidence of origin and is never edited. `2. wiki` is where thinking happens.
+   `3. output` holds finished work.
+2. Output is assembled from `2. wiki`, never straight from `1. raw` and never from model memory.
+3. `.pageindex\`, `.vector\`, converted Markdown and retrieval packets are working derivatives.
+   They can be deleted and rebuilt, and they never count as canonical evidence.
+4. An unsourced claim is written as `[NEEDS SOURCE]`, not patched over with a logical bridge.
+
 ## Requirements
 
 - Windows, PowerShell 5.1 or later.
@@ -34,6 +82,8 @@ See `REFERENCE.md` for the full command and file reference.
 - Cloud retrieval (PageIndex, structured PDFs) needs an `OPENAI_API_KEY` environment variable.
 - Local retrieval (the vector store) needs no key. Embeddings run on the machine with
   fastembed; documents never leave it.
+- The gap-fill lane (`promote-terra`, Kimi `kimi-k3`) needs a `MOONSHOT_API_KEY` environment
+  variable. Everything else runs without it.
 
 ## Install
 
