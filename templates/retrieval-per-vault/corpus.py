@@ -108,6 +108,21 @@ def _save_manifest(m):
         json.dump(m, fh, indent=2, ensure_ascii=False)
 
 
+# Billing/auth errors hit every doc the same way: retrying, falling back to
+# standard mode, or blaming the PDF only wastes calls and misleads.
+_FATAL_API = ("insufficient_quota", "no credits", "billing", "invalid_api_key",
+              "incorrect api key", "authenticationerror")
+
+
+def _fatal_api(e):
+    # PageIndex wraps the OpenAI error ("failed after 10 retries" from e); walk the chain.
+    while e is not None:
+        if any(k in str(e).lower() for k in _FATAL_API):
+            return True
+        e = e.__cause__
+    return False
+
+
 def ingest(target=None):
     """Index PDFs in RAW whose hash is new or changed. Skip unchanged.
     target: filename to index alone (still respects sha-skip); None = sweep all of RAW."""
@@ -125,6 +140,7 @@ def ingest(target=None):
     manifest = _load_manifest()
     client = _client(indexing=True)
     failed = []
+    fatal = False
     for name in sorted(pdfs):
         path = os.path.join(RAW, name)
         digest = _sha256(path)
@@ -140,11 +156,18 @@ def ingest(target=None):
             try:
                 doc = client.submit_document(path, mode="flash", wait=True)
             except Exception as e_flash:
+                if _fatal_api(e_flash):
+                    raise
                 print(f"  flash failed ({e_flash}); trying standard ...", flush=True)
                 doc = client.submit_document(path, mode="standard", wait=True)
         except Exception as e:
             print(f"  FAILED {name}: {e}")
             failed.append(name)
+            if _fatal_api(e):
+                print("  STOP: OpenAI billing/API-key error, not a PDF problem. Batch aborted.")
+                print("  Check credits at platform.openai.com/settings/organization/billing or OPENAI_API_KEY.")
+                fatal = True
+                break
             continue
         doc_id = doc.get("doc_id") or doc.get("id")
         manifest[name] = {"doc_id": doc_id, "sha256": digest,
@@ -154,8 +177,9 @@ def ingest(target=None):
     print(f"\nmanifest: {len(manifest)} docs -> {MANIFEST}")
     if failed:
         print(f"FAILED to index ({len(failed)}): {', '.join(failed)}")
-        print("  A PDF with no section structure, or a pure scan, often fails in local mode.")
-        print("  Try a structured document (a titled report/regulation/paper), or OCR/PageIndex Cloud.")
+        if not fatal:
+            print("  A PDF with no section structure, or a pure scan, often fails in local mode.")
+            print("  Try a structured document (a titled report/regulation/paper), or OCR/PageIndex Cloud.")
     sync_wiki()   # keep the wiki inventory table in step with the manifest
 
 
