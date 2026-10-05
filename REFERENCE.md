@@ -287,7 +287,7 @@ Needs `OPENAI_API_KEY`.
 | `py -3.13 corpus.py ask-file "name.pdf" "q"` | one PDF -> packet in `tmp/retrieval-packets/` + draft in `2. wiki/_terra-drafts/` (append) | yes |
 | `py -3.13 corpus.py ask-essential "name.pdf"` / `--all` / `--new` | the Q1-Q8 essential set for one PDF, every PDF, or PDFs without a draft | yes |
 | `py -3.13 corpus.py draft-wiki "name.pdf"` | deprecated alias for `ask-essential` | yes |
-| `py -3.13 corpus.py remove "name.pdf"` | drop from `.pageindex/` and the manifest; `1. raw/` is untouched | no |
+| `py -3.13 corpus.py remove "name.pdf"` | drop from `.pageindex/` and the manifest; `1. raw/` is untouched, so move the PDF out of `1. raw/` or the next `ingest` indexes it again | no |
 | `py -3.13 corpus.py sync-wiki` | rewrite the document-inventory table in the note named by `WIKI_NOTE` (between the `corpus:docs` markers, or appended as a new section if they're missing). Not claim synthesis | no |
 
 `ask` writes nothing on purpose: cross-document answers risk misattribution, so a person reads
