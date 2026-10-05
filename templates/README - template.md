@@ -109,7 +109,7 @@ By default `rag.ps1 <command>` calls `vcorpus.py`. Add `-Page` to call `corpus.p
 | `.\rag.ps1 ask "..."` | `py -3.13 .\vcorpus.py ask "..."` |
 | `.\rag.ps1 ask "..." -Page` | `py -3.13 .\corpus.py ask "..."` |
 | `.\rag.ps1 ask-file "x" "q"` | `py -3.13 .\vcorpus.py ask-file "x" "q"` |
-| `.\rag.ps1 remove "x.pdf"` | `py -3.13 .\corpus.py remove "x.pdf"` (always PageIndex, no `-Page` needed). Drops the PDF from `.pageindex\` and the manifest but leaves `1. raw\` alone, so move the PDF out of `1. raw\` yourself or the next `ingest` indexes it again |
+| `.\rag.ps1 remove "x.pdf"` | `py -3.13 .\corpus.py remove "x.pdf"` (always PageIndex, no `-Page` needed). Drops the PDF from `.pageindex\` and the manifest but leaves `1. raw\` alone, so move the PDF out of `1. raw\` yourself or the next `ingest` indexes it again. Deleting the PDF from `1. raw\` alone does not unindex it (`ask` reads the manifest); run `remove`, which works even after the file is gone |
 | `.\rag.ps1 convert "x.pdf"` | the `AIO_PDF2MD` converter + promote the `.md` + park the PDF under `1. raw\_source-pdf\` |
 | `.\rag.ps1 review-draft "x"` | `py -3.13 scripts\review-draft.py <vault> "x"` (control plane) |
 | `.\rag.ps1 synth` | calls `ask-batch.ps1` (control plane) with `-Vault` set to this vault |
